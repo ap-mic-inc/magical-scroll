@@ -1,5 +1,5 @@
 # https://github.com/microsoft/vscode-dev-containers/blob/main/containers/javascript-node/.devcontainer/base.Dockerfile
-ARG VARIANT=16-bullseye
+ARG VARIANT=18-bullseye
 FROM node:${VARIANT}
 
 ENV DEBIAN_FRONTEND=noninteractive \
@@ -9,7 +9,7 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install -y build-essential tzdata nano git iputils-ping tmux curl \
     && apt-get install -y sudo \
-    && rm -v /etc/localtime \
+    && rm -v /etc/localtime \ 
     && ln -svnf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
@@ -17,7 +17,7 @@ RUN apt-get update \
 ARG NODE_MODULES="tslint-to-eslint-config typescript"
 RUN npm install -g ${NODE_MODULES} \
     && npm cache clean --force > /dev/null 2>&1
-
+    
 # install code to install recommended extensions
 RUN curl -fsSL -o code.deb "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" \
     && apt install -y ./code.deb
@@ -28,9 +28,9 @@ RUN chown -R node:node /workspaces \
 RUN echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 USER node
 
-COPY .vscode/extensions.json extensions.json
+ARG REPO_PATH
 # install recommended extensions
-RUN awk '/"recommendations"/,/\]/{print}' extensions.json \
+RUN awk '/"recommendations"/,/\]/{print}' ${REPO_PATH}/.vscode/extensions.json \
         | grep -o '".*\..*"' \
         | tr -d '"' \
         | xargs -I {} code --extensions-dir "${HOME}/.vscode-server/extensions" --install-extension {} \
