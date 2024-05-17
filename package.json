@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/L-Eli/magical-scroll.git"
+    "url": "git+https://github.com/ap-mic-inc/magical-scroll"
   },
   "keywords": [
     "js",
@@ -21,9 +21,9 @@
   "author": "Eli Lin",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/L-Eli/magical-scroll/issues"
+    "url": "https://github.com/ap-mic-inc/magical-scroll/issues"
   },
-  "homepage": "https://github.com/L-Eli/magical-scroll#readme",
+  "homepage": "https://github.com/ap-mic-inc/magical-scroll#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.19.3",
     "@rollup/plugin-babel": "^5.3.1",
